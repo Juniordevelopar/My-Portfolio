@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashish Kumar - Dynamic Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --electric-blue: #00f5ff;
+            --violet: #a855f7;
+            --lime: #bef264;
+            --hot-pink: #ff2d75;
+            --deep-purple: #4c1d95;
+            --dark-bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.8);
+            --text-light: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Text Animations */
+        @keyframes rainbow {
+            0% { color: var(--electric-blue); }
+            25% { color: var(--hot-pink); }
+            50% { color: var(--lime); }
+            75% { color: var(--violet); }
+            100% { color: var(--electric-blue); }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blinkCursor {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--electric-blue); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                        transparent, 
+                        var(--electric-blue), 
+                        transparent);
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            background: linear-gradient(45deg, 
+                        var(--electric-blue), 
+                        var(--hot-pink), 
+                        var(--lime));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            animation: pulse 3s infinite;
+        }
+
+        .tagline {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 1.5rem;
+            color: var(--lime);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .tagline::after {
+            content: '|';
+            position: absolute;
+            right: -10px;
+            animation: blinkCursor 0.7s infinite;
+        }
+
+        .typewriter {
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typewriter 3s steps(40) 1s 1 normal both;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            animation: slideUp 1s ease-out;
+        }
+
+        .contact-info i {
+            color: var(--hot-pink);
+            animation: pulse 1.5s infinite;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                        var(--violet), 
+                        var(--electric-blue));
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 20px var(--electric-blue);
+            animation: none;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            animation: slideUp 1s ease-out;
+            transition: all 0.5s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3);
+            border-color: var(--electric-blue);
+        }
+
+        .section-card h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--electric-blue);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-card h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                        var(--electric-blue), 
+                        var(--hot-pink));
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(0, 245, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.5s ease;
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 245, 255, 0.3);
+            border-color: var(--lime);
+            animation: none;
+        }
+
+        .skill-card i {
+            font-size: 3rem;
+            color: var(--hot-pink);
+            margin-bottom: 1.5rem;
+            display: block;
+            animation: rainbow 4s infinite;
+        }
+
+        .skill-card h3 {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Timeline Style Education */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, 
+                        var(--hot-pink), 
+                        var(--violet));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+            animation: slideUp 1s ease-out;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3rem;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--electric-blue);
+            border: 3px solid var(--dark-bg);
+            box-shadow: 0 0 10px var(--electric-blue);
+        }
+
+        .timeline-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--lime);
+        }
+
+        .timeline-item p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: rgba(255, 45, 117, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 45, 117, 0.3);
+            transition: all 0.5s ease;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255, 45, 117, 0.3);
+            border-color: var(--violet);
+            animation: none;
+        }
+
+        .project-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 45, 117, 0.2);
+        }
+
+        .project-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            font-family: 'Source Code Pro', monospace;
+        }
+
+        .project-header i {
+            color: var(--lime);
+            transition: transform 0.5s ease;
+        }
+
+        .project-card.active .project-header i {
+            transform: rotate(180deg);
+        }
+
+        .project-details {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+            color: var(--text-light);
+            font-family: 'Source Code Pro', monospace;
+        }
+
+        .project-card.active .project-details {
+            max-height: 200px;
+            padding: 1.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-card {
+                padding: 1.5rem;
+            }
+            
+            .social-link {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1>Ashish Kumar</h1>
+            <p class="tagline typewriter">Developer & Problem Solver</p>
+            
+            <div class="contact-info">
+                <p><i class="fas fa-envelope"></i> ashishs9122@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +91 9939848533</p>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/ashish-kumar-75bb391a6/" class="social-link" target="_blank">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://wa.me/919939848533" class="social-link" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+        </header>
+
+        <!-- About Section -->
+        <section class="section-card">
+            <h2>About Me</h2>
+            <p style="margin-bottom: 1rem; animation: slideUp 1.2s ease-out;">
+                I am a passionate developer with expertise in multiple programming languages and technologies.
+            </p>
+            <p style="animation: slideUp 1.4s ease-out;">
+                My journey in technology began with a curiosity for solving problems and has evolved into a dedicated career path. I enjoy tackling complex challenges and creating efficient solutions.
+            </p>
+        </section>
+
+        <!-- Technical Skills -->
+        <section class="section-card">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-file-excel"></i>
+                    <h3>Microsoft Office</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-python"></i>
+                    <h3>Python</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-java"></i>
+                    <h3>Java</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-database"></i>
+                    <h3>MySQL</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>Prompt Engineering</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Soft Skills -->
+        <section class="section-card">
+            <h2>Soft Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Problem-solving</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Critical Thinking</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-random"></i>
+                    <h3>Adaptability</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Time Management</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section class="section-card">
+            <h2>Education</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>MCA: Parul University</h3>
+                    <p>Present</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>BCA: R.K. Desai Achhariwala</h3>
+                    <p>2021-2024</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>12th: R.K.M English High School</h3>
+                    <p>2019-2021</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>10th: Shanti Mission Academy</h3>
+                    <p>2018-2019</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="section-card">
+            <h2>Academic Projects</h2>
+            <div class="project-card" onclick="toggleProject(this)">
+                <div class="project-header">
+                    <h3><i class="fas fa-newspaper"></i> News Portal (BCA)</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="project-details">
+                    <p>Developed using HTML, CSS, JavaScript, and PHP with MySQL database. Features include user authentication, news categorization, and admin content management system.</p>
+                </div>
+            </div>
+            
+            <div class="project-card" onclick="toggleProject(this)">
+                <div class="project-header">
+                    <h3><i class="fas fa-truck"></i> Courier Management System (BCA)</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="project-details">
+                    <p>Built with Java and MySQL, this system allows users to track packages, manage deliveries, and generate reports. Includes admin dashboard and customer interfaces.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section class="section-card">
+            <h2>Certifications</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Yoga Certification</h3>
+                    <p>VNSGU</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Tally Certification</h3>
+                    <p>VNSGU</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hobbies -->
+        <section class="section-card">
+            <h2>Hobbies</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-spa"></i>
+                    <h3>Yoga</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-gamepad"></i>
+                    <h3>Playing BGMI</h3>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-hands-helping"></i>
+                    <h3>Community Involvement</h3>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Toggle project details
+        function toggleProject(element) {
+            element.classList.toggle('active');
+            
+            // Close other open projects
+            const allProjects = document.querySelectorAll('.project-card');
+            allProjects.forEach(project => {
+                if (project !== element && project.classList.contains('active')) {
+                    project.classList.remove('active');
+                }
+            });
+        }
+
+        // Animate elements when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section-card, .skill-card, .timeline-item').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Typewriter effect for multiple lines
+        const typewriterLines = [
+            "Developer & Problem Solver",
+            "Tech Enthusiast",
+            "Creative Thinker"
+        ];
+        let currentLine = 0;
+        const tagline = document.querySelector('.tagline');
+
+        function cycleTaglines() {
+            tagline.classList.remove('typewriter');
+            void tagline.offsetWidth; // Trigger reflow
+            tagline.textContent = typewriterLines[currentLine];
+            tagline.classList.add('typewriter');
+            
+            currentLine = (currentLine + 1) % typewriterLines.length;
+            setTimeout(cycleTaglines, 4000); // Change every 4 seconds
+        }
+
+        // Start cycling after initial animation completes
+        setTimeout(cycleTaglines, 3000);
+    </script>
+</body>
+</html>
